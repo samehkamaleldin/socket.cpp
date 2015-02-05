@@ -8,7 +8,7 @@
 // Create new tcp server instance
 TcpServer :: TcpServer (int portNumber)
 {
-  //initalize port number and stop server flag
+  //initialize port number and stop server flag
   _port             = portNumber;
   _stop_server_flag = 0;
 
@@ -19,7 +19,7 @@ TcpServer :: TcpServer (int portNumber)
   _server_address.sin_addr.s_addr = htonl(INADDR_ANY); // make server accept all addresses
   _server_address.sin_port        = htons(_port);       // Set port number in type [network byte order]
 
-  // initalize socket with [internet addresses, socket stream sequences with default protocol]
+  // initialize socket with [internet addresses, socket stream sequences with default protocol]
   _listenfd = socket( AF_INET, SOCK_STREAM, 0);
 
   // bind the address name and port number to the scoket address struct

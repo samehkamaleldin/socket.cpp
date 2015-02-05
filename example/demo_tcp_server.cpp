@@ -4,7 +4,7 @@
 
 int main(int argc, char** argv)
 {
-  //initalize default port number and max connection cout
+  //initialize default port number and max connection cout
   int port = 12001, max_connection_count= 1000;
 
   // check if there are any passed arguments
