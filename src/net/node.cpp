@@ -25,5 +25,5 @@ Node :: Node(int port_number)
   bzero( &self_address , sizeof(self_address) );
   bzero( &host_address , sizeof(host_address) );
 
-  port = portNumber;
+  port = port_number;
 }
