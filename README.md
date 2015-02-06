@@ -1,4 +1,5 @@
-# socket.cpp
+# socket.cpp [![Build Status](https://travis-ci.org/samehkamaleldin/socket.cpp.svg?branch=master)](https://travis-ci.org/samehkamaleldin/socket.cpp)
+
 Simple socket programming library in C++
 
 ### Contribution
