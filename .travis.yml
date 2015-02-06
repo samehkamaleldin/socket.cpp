@@ -1,10 +1,10 @@
 language: cpp
 compiler:
   - g++
-
 # Setup different environments to test
 env:
-  - CPP07=0
+  - target=lib
+  - target=examples
 
 # Setup repos etc before installation
 before_install:
@@ -20,11 +20,10 @@ install:
   
   # install GNU make
   - sudo apt-get install build-essential
-  
-  - make --version
   - g++ --version
 
 # command to run tests
 script:
   - cd build
-  - make
+  - if [ "$target" == "lib"      ]; then make socket-cpp.so; fi;
+  - if [ "$target" == "examples" ]; then make examples;      fi;
