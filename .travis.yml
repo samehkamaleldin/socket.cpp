@@ -5,7 +5,6 @@ compiler:
 # Setup different environments to test
 env:
   - CPP07=0
-  - CPP11=1
 
 # Setup repos etc before installation
 before_install:
@@ -14,12 +13,16 @@ before_install:
 
 # Install dependencies
 install:
-  # install g++ 4.8
-  - sudo apt-get install -qq g++-4.8;
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50;
-
+  # install g++ 4.6
+  - sudo apt-get install -qq g++-4.6;
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 50;
+  - sudo ln -s /usr/bin/g++-4.6 /usr/bin/g++
+  
   # install GNU make
   - sudo apt-get install build-essential
+  
+  - make --version
+  - g++ --version
 
 # command to run tests
 script:
