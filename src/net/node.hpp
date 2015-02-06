@@ -26,7 +26,7 @@ protected:
 
   // initialize an new tcp server instance
   Node();
-  Node(int)
+  Node(int);
 
   // address structure for both server and client
   struct sockaddr_in  self_address, host_address;
