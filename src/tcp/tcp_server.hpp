@@ -26,7 +26,7 @@ public:
   TcpServer(int);
 
   // start listening at specified port
-  void Listen(int);
+  int Listen(int);
 
   // stop tcp server
   void Stop();
