@@ -4,8 +4,11 @@
 //==============================================================================================
 
 #include <tcp/tcp_server.hpp>
+#include <stdexcept>
 
+// ---------------------------------------------------------------------------------------------
 // Create new tcp server instance
+// ---------------------------------------------------------------------------------------------
 TcpServer :: TcpServer (int portNumber)
 {
   //initialize port number and stop server flag
@@ -27,12 +30,17 @@ TcpServer :: TcpServer (int portNumber)
 
 }
 
+// ---------------------------------------------------------------------------------------------
 // start listening at specified port with limited number of connections at the same time
-void TcpServer :: Listen (int accepted_num_of_connections){
+// ---------------------------------------------------------------------------------------------
+int TcpServer :: Listen (int accepted_num_of_connections){
+  int result = listen(_listenfd, accepted_num_of_connections);
 
   // start listening to the port
-  cout << "Start listening at port " << _port << std::endl;
-  listen(_listenfd, accepted_num_of_connections);
+  if ( result != 0)
+    return result;
+  else
+    cout << "Start listening at port " << _port << std::endl; // For testing purposes
 
   // forever loop for accepting connections
   while(1)
@@ -84,4 +92,14 @@ void TcpServer :: Listen (int accepted_num_of_connections){
       }
     }
   }
+
+  return result;
+}
+
+// ---------------------------------------------------------------------------------------------
+// Summary: Stop server from listening
+// ---------------------------------------------------------------------------------------------
+void TcpServer :: Stop()
+{
+  _stop_server_flag;
 }
