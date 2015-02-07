@@ -17,7 +17,9 @@ CXX      = g++
 CXXFLAGS = -g -I$(LIB_INC_DIR)
 LDFLAGS  = -shared -fpic
 
-default: $(TARGET)
+default: all
+
+all: $(TARGET) examples
 
 $(TARGET): $(OBJ_FILES)
 	@mkdir -p $(LIB_DIST_DIR)
