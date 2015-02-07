@@ -3,8 +3,7 @@ compiler:
   - g++
 # Setup different environments to test
 env:
-  - target=lib
-  - target=examples
+  - target=dev
 
 # Setup repos etc before installation
 before_install:
@@ -16,8 +15,7 @@ install:
   # install g++ 4.6
   - sudo apt-get install -qq g++-4.6;
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 50;
-  - g++ --version
-  
+
   # install GNU make
   - sudo apt-get install build-essential
   - g++ --version
@@ -25,5 +23,4 @@ install:
 # command to run tests
 script:
   - cd build
-  - if [ "$target" == "lib"      ]; then make socket-cpp.so; fi;
-  - if [ "$target" == "examples" ]; then make examples;      fi;
+  - make
