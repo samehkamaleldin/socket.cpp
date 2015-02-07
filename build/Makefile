@@ -25,3 +25,4 @@ $(TARGET): $(OBJ_FILES)
 
 examples:
 	$(CXX) $(CXXFLAGS) $(SRC_FILES) $(EXAMPLES_DIR)/demo_tcp_server.cpp -o $(LIB_DIST_DIR)/demo_tcp_server.out
+	$(CXX) $(CXXFLAGS) $(SRC_FILES) $(EXAMPLES_DIR)/demo_tcp_client.cpp -o $(LIB_DIST_DIR)/demo_tcp_client.out
