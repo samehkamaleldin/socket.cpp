@@ -26,3 +26,11 @@
 *.exe
 *.out
 *.app
+
+# Archives
+*.tar.gz
+*.tar
+*.tar.bz
+*.tar.bz2
+*.zip
+*.7z
