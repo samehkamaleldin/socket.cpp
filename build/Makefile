@@ -61,4 +61,4 @@ clean:
 	@rm --recursive --force $(LIB_DIST_DIR)/examples
 	@rm --recursive --force $(LIB_DIST_DIR)/demo_tcp_server.out
 	@rm --recursive --force $(LIB_DIST_DIR)/demo_tcp_client.out
-	@rm --recursive --force $(LIB_DIST_DIR)/*.tar*
+	@rm --recursive --force $(LIB_DIST_DIR)/*.tar* 
