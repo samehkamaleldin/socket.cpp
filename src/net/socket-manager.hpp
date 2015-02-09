@@ -15,8 +15,7 @@ class SocketManager{
 static bool IsPortOpen(int);
 static bool IsPortOpen(int,string);
 
-private:
-  static int    _socket_fd, _node_address_lenght;
-  static struct sockaddr_in _node_address;
+static int    _socket_fd, _node_address_lenght;
+static struct sockaddr_in _node_address;
 
 };

@@ -12,6 +12,16 @@
 #include <netdb.h>                 // Needed for the socket functions
 #include <netinet/in.h>            // Needed for internet addresses
 #include <errno.h>                 // for using error number macros
+#include <arpa/inet.h>             // Needed for internet addresses
+
+// ---------------------------------------------------------------------------------------------
+// Definition of static members
+// ---------------------------------------------------------------------------------------------
+int    SocketManager :: _socket_fd;
+int    SocketManager ::  _node_address_lenght;
+
+struct sockaddr_in SocketManager :: _node_address;
+
 
 // ---------------------------------------------------------------------------------------------
 // Summary : Check if port is open in current machine
@@ -27,7 +37,7 @@ bool SocketManager :: IsPortOpen (int port_number){
 
   _node_address.sin_family      = __type_internet_domain_sockets__; // IP version not specified. Can be both.
   _node_address.sin_addr.s_addr = htonl(INADDR_ANY);                // make server accept all addresses
-  _node_address.sin_port        = htons(portNumber);                // Set port number in type [network byte order]
+  _node_address.sin_port        = htons(port_number);               // Set port number in type [network byte order]
 
   // initialize socket with [internet addresses, socket stream sequences with default protocol]
   _socket_fd = socket( __type_internet_domain_sockets__ , __type_byte_stream_socket__ , 0 );
@@ -56,7 +66,7 @@ bool SocketManager :: IsPortOpen (int port_number, string address){
 
   _node_address.sin_family      = __type_internet_domain_sockets__; // IP version not specified. Can be both.
   _node_address.sin_addr.s_addr = inet_addr( address.c_str() );     // Set node address name
-  _node_address.sin_port        = htons(portNumber);                // Set port number in type [network byte order]
+  _node_address.sin_port        = htons(port_number);               // Set port number in type [network byte order]
 
   // initialize socket with [internet addresses, socket stream sequences with default protocol]
   _socket_fd = socket( __type_internet_domain_sockets__ , __type_byte_stream_socket__ , 0 );
