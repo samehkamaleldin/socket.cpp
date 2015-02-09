@@ -25,20 +25,21 @@ TcpServer :: TcpServer (int portNumber)
   // initialize socket with [internet addresses, socket stream sequences with default protocol]
   _listenfd = socket( AF_INET, SOCK_STREAM, 0);
 
-  // bind the address name and port number to the scoket address struct
-  bind(_listenfd,(struct sockaddr *)&_server_address,sizeof(_server_address));
-
 }
 
 // ---------------------------------------------------------------------------------------------
 // start listening at specified port with limited number of connections at the same time
 // ---------------------------------------------------------------------------------------------
 int TcpServer :: Listen (int accepted_num_of_connections){
-  int result = listen(_listenfd, accepted_num_of_connections);
+
+  // bind the address name and port number to the scoket address struct
+  int bind_result   = bind(_listenfd,(struct sockaddr *)&_server_address,sizeof(_server_address));
+
+  int listen_result = listen(_listenfd, accepted_num_of_connections);
 
   // start listening to the port
-  if ( result != 0)
-    return result;
+  if ( listen_result != 0 || bind_result != 0)
+    return -1;
   else
     cout << "Start listening at port " << _port << std::endl; // For testing purposes
 
@@ -93,7 +94,7 @@ int TcpServer :: Listen (int accepted_num_of_connections){
     }
   }
 
-  return result;
+  return listen_result;
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -101,5 +102,5 @@ int TcpServer :: Listen (int accepted_num_of_connections){
 // ---------------------------------------------------------------------------------------------
 void TcpServer :: Stop()
 {
-  _stop_server_flag;
+  _stop_server_flag = 1;
 }
