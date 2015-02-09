@@ -22,7 +22,9 @@ int main(int argc, char** argv)
   TcpServer server(port);
 
   //start listening to connections
-  server.Listen(max_connection_count);
+  int result = server.Listen(max_connection_count);
+  if(result != 0)
+    cout << "Faild to start server !" << std::endl;
 
   return 0;
 }
