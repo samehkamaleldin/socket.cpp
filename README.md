@@ -17,3 +17,9 @@ cd ./socket.cpp./build
 make socket-cpp.so examples
 ```
 And the target library `socket-cpp.so` and binaries for examples can be found in `dist` directory under repositories home directory.
+
+## Acknowledgement
+The development of this library has been inspired by a set of code documentation pages, C++ examples and tutorials
+about C/C++ socket programming such as:-
+
+1. [Kevin C. Almeroth, University of California - CS 176B: Network Computing (Examples)](http://www.cs.ucsb.edu/~almeroth/classes/W01.176B/hw2/examples/)
