@@ -2,6 +2,14 @@
 #include <tcp/tcp_server.hpp>
 #include <sstream>
 
+using std::string;
+using std::cout;
+
+void print(Node* nd, string msg)
+{
+  cout<< "server recieved: " << msg << std::endl;
+}
+
 int main(int argc, char** argv)
 {
   //initialize default port number and max connection cout
@@ -20,6 +28,8 @@ int main(int argc, char** argv)
 
   // create server instance with specified port number
   TcpServer server(port);
+
+  server.OnMessage(print);
 
   //start listening to connections
   int result = server.Listen(max_connection_count);

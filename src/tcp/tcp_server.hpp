@@ -14,7 +14,7 @@
 #include <netdb.h>      // Needed for the socket functions
 #include <netinet/in.h> // Needed for internet addresses
 
-#define _MSG_BUFFER_SIZE_ 1000
+#include <net/node.hpp>
 
 using std::string;
 using std::cout;
@@ -29,10 +29,15 @@ public:
   // start listening at specified port
   int Listen(int);
 
+  // servre On message behavior
+  void OnMessage(void (*fptr)(Node*,string) );
+
   // stop tcp server
   void Stop();
 
 private:
+
+  void (*_on_msg_fn_ptr) (Node*,string) = NULL;
 
   // address structure for both server and client
   struct sockaddr_in _server_address,_client_address;

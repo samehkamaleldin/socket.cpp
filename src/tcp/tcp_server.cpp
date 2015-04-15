@@ -84,12 +84,25 @@ int TcpServer :: Listen (int accepted_num_of_connections){
 
         // put trailing characters
         _message[_message_length] = 0;
+        string msg_str(_message);
+
 
         // send back the received message [ For testing purposes]
-        sendto(_connfd,_message,_message_length,0,(struct sockaddr *)&_client_address,sizeof(_client_address));
+        //sendto(_connfd,_message,_message_length,0,(struct sockaddr *)&_client_address,sizeof(_client_address));
 
-        // print the received message
-        cout << "Message: " << _message << std::endl;
+        // execute OnMessage function if available
+        if ( _on_msg_fn_ptr  != NULL)
+        {
+          try
+          {
+            this->_on_msg_fn_ptr(NULL,msg_str);
+          }
+          catch(std::exception exp)
+          {
+            std::cerr << "failed to execute [OnMessage] function";
+          }
+        }
+
       }
     }
   }
@@ -103,4 +116,12 @@ int TcpServer :: Listen (int accepted_num_of_connections){
 void TcpServer :: Stop()
 {
   _stop_server_flag = 1;
+}
+
+// ---------------------------------------------------------------------------------------------
+// Summary: Assign on message recieved behavoir
+// ---------------------------------------------------------------------------------------------
+void TcpServer :: OnMessage(void (*fptr)(Node*, std::string))
+{
+  _on_msg_fn_ptr = fptr;
 }

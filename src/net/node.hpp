@@ -15,6 +15,8 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
+using std::string;
+
 // define global macros
 #define _MSG_BUFFER_SIZE_       2048
 #define _MAX_ADDRESS_NAME_      1024
@@ -22,12 +24,17 @@
 
 class Node{
 
-protected:
-
+public:
   // initialize an new tcp server instance
   Node();
   Node(int);
+  Node(string,string,string);
 
+  std::string ip;
+  std::string name;
+  std::string type;
+
+protected:
   // address structure for both server and client
   struct sockaddr_in  self_address, host_address;
   struct sockaddr_in *other_addresses;
