@@ -5,15 +5,15 @@
 using std::string;
 using std::cout;
 
-void print(Node* nd, string msg)
+void print(Node *nd, string msg)
 {
-  cout<< "server recieved: " << msg << std::endl;
+  cout<< nd->ip <<" : " << msg << std::endl;
 }
 
 int main(int argc, char** argv)
 {
   //initialize default port number and max connection cout
-  int port = 12001, max_connection_count= 1000;
+  int port = 12002, max_connection_count= 1000;
 
   // check if there are any passed arguments
   if(argc > 1)

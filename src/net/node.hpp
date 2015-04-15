@@ -15,6 +15,8 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
+#include <net/utils.hpp>
+
 using std::string;
 
 // define global macros
@@ -34,7 +36,10 @@ public:
   std::string name;
   std::string type;
 
+  void SetIPFromSocketAddress(struct sockaddr *socketAddress);
+
 protected:
+
   // address structure for both server and client
   struct sockaddr_in  self_address, host_address;
   struct sockaddr_in *other_addresses;

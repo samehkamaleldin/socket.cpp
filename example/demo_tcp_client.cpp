@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 {
 
   // initialize default port number and max connection cout
-  int     port    = 12001;
+  int     port    = 12002;
   string  address = "127.0.0.1";
 
   // check if there are any passed arguments

@@ -62,7 +62,6 @@ int TcpServer :: Listen (int accepted_num_of_connections){
       continue;
 
     cout << "Connection accepted - " << _connfd << std::endl;
-
     // spawn a new proceess to recieve messages
     if ((_childpid = fork()) == 0)
     {
@@ -95,7 +94,10 @@ int TcpServer :: Listen (int accepted_num_of_connections){
         {
           try
           {
-            this->_on_msg_fn_ptr(NULL,msg_str);
+            std::string client_ip = inet_ntoa(_client_address.sin_addr);
+
+            Node* nd = new Node("",client_ip,"");
+            this -> _on_msg_fn_ptr(nd,msg_str);
           }
           catch(std::exception exp)
           {
