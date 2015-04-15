@@ -13,7 +13,7 @@ void print(Node *nd, string msg)
 int main(int argc, char** argv)
 {
   //initialize default port number and max connection cout
-  int port = 12002, max_connection_count= 1000;
+  int port = 12002;
 
   // check if there are any passed arguments
   if(argc > 1)
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
   server.OnMessage(print);
 
   //start listening to connections
-  int result = server.Listen(max_connection_count);
+  int result = server.Listen();
 
   if(result != 0)
     cout << "Faild to start server !" << std::endl;
