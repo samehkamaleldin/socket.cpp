@@ -1,9 +1,32 @@
 # socket.cpp [![Build Status](https://travis-ci.org/samehkamaleldin/socket.cpp.svg?branch=master)](https://travis-ci.org/samehkamaleldin/socket.cpp)
 
-Simple socket programming library in C++
+Simple socket programming library in C++, that facilitates using sockets in c++ as it provides an easy interface for socket programming functions.
+
+
+### How to use
+**socket.cpp** library tends to provide an interface of sockets functions similar to JavaScript's `socket.io` framework.
+Here is a few example of library usage:
+
+*TCP Server*
+```cpp
+// create simple tcp server
+int port = 4000;
+tcp::server server(port);
+server.OnMessage(PrintMessage);
+server.Listen();
+```
+
+*TCP Client*
+```cpp
+// create simple tcp client and connect to server
+int port = 4000;
+tcp::client client(port);
+client.Connect();
+client.Send("Hi");
+```
 
 ### Contribution
-If you want to modify how library is implemented, click the "Fork" button in the top-right corner of this page, and then clone your fork from the command line by replacing username with your GitHub username:
+If you want to modify how library is implemented, click the `Fork` button in the top-right corner of this page, and then clone your fork from the command line by replacing [username] with your GitHub user name:
 ``` bash
 git clone https://github.com/[username]/socket.cpp.git
 ```
