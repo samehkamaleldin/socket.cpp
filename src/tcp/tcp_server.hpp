@@ -1,5 +1,5 @@
 //==============================================================================================
-//= CLASS       : TcpServer                                                                   =
+//= CLASS       : server                                                                   =
 //= Description : TCP Server module that creates and manages an instance of a tcp server       =
 //==============================================================================================
 
@@ -19,15 +19,16 @@
 using std::string;
 using std::cout;
 
-class TcpServer{
+namespace tcp {
+class server{
 
 public:
 
   // initialize an new tcp server instance
-  TcpServer(int);
+  server(int);
 
   // start listening at specified port
-  int Listen(int);
+  int Listen();
 
   // servre On message behavior
   void OnMessage(void (*fptr)(Node*,string) );
@@ -58,4 +59,5 @@ private:
   int _stop_server_flag;
 };
 
+}
 #endif

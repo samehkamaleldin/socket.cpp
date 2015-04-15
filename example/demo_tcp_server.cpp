@@ -27,12 +27,14 @@ int main(int argc, char** argv)
   }
 
   // create server instance with specified port number
-  TcpServer server(port);
+  tcp::server server(port);
 
+  // set async fn to handle incoming messages
   server.OnMessage(print);
 
   //start listening to connections
   int result = server.Listen(max_connection_count);
+
   if(result != 0)
     cout << "Faild to start server !" << std::endl;
 

@@ -1,15 +1,17 @@
 //==============================================================================================
-//= CLASS       : TcpServer                                                                    =
+//= CLASS       : server                                                                    =
 //= Description : TCP Server module that creates and manages an instance of a tcp server       =
 //==============================================================================================
 
 #include <tcp/tcp_server.hpp>
 #include <stdexcept>
 
+namespace tcp {
+
 // ---------------------------------------------------------------------------------------------
 // Create new tcp server instance
 // ---------------------------------------------------------------------------------------------
-TcpServer :: TcpServer (int portNumber)
+server :: server (int portNumber)
 {
   //initialize port number and stop server flag
   _port             = portNumber;
@@ -30,7 +32,9 @@ TcpServer :: TcpServer (int portNumber)
 // ---------------------------------------------------------------------------------------------
 // start listening at specified port with limited number of connections at the same time
 // ---------------------------------------------------------------------------------------------
-int TcpServer :: Listen (int accepted_num_of_connections){
+int server :: Listen (){
+
+  int accepted_num_of_connections = 10000;
 
   // bind the address name and port number to the scoket address struct
   int bind_result   = bind(_listenfd,(struct sockaddr *)&_server_address,sizeof(_server_address));
@@ -115,7 +119,7 @@ int TcpServer :: Listen (int accepted_num_of_connections){
 // ---------------------------------------------------------------------------------------------
 // Summary: Stop server from listening
 // ---------------------------------------------------------------------------------------------
-void TcpServer :: Stop()
+void server :: Stop()
 {
   _stop_server_flag = 1;
 }
@@ -123,7 +127,9 @@ void TcpServer :: Stop()
 // ---------------------------------------------------------------------------------------------
 // Summary: Assign on message recieved behavoir
 // ---------------------------------------------------------------------------------------------
-void TcpServer :: OnMessage(void (*fptr)(Node*, std::string))
+void server :: OnMessage(void (*fptr)(Node*, std::string))
 {
   _on_msg_fn_ptr = fptr;
+}
+
 }

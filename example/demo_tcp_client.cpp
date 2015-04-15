@@ -24,7 +24,7 @@ int main(int argc, char** argv)
   }
 
   // create server instance with specified port number
-  TcpClient client(address,port);
+  tcp::client client(address,port);
 
   // connect to host node
   client.Connect();
