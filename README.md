@@ -9,7 +9,7 @@ git clone https://github.com/[username]/socket.cpp.git
 ```
 
 ## Building
-Building process has been tested using `GNU Make 3.81` and `g++ 4.6.4`
+Building process has been tested using `GNU Make 3.81` and `g++ 4.9.2`
 And library can be build easily as follows:
 ``` bash
 git clone https://github.com/samehkamaleldin/socket.cpp.git
