@@ -19,8 +19,10 @@ server.Listen();
 *TCP Client*
 ```cpp
 // create simple tcp client and connect to server
-int port = 4000;
-tcp::client client(port);
+int     port    = 4000;
+string  address = "127.0.0.1";
+
+tcp::client client( address, port);
 client.Connect();
 client.Send("Hi");
 ```
