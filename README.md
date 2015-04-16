@@ -38,8 +38,8 @@ Building process has been tested using `GNU Make 3.81` and `g++ 4.9.2`
 And library can be build easily as follows:
 ``` bash
 git clone https://github.com/samehkamaleldin/socket.cpp.git
-cd ./socket.cpp./build
-make socket-cpp.so examples
+cd ./socket.cpp/build
+make
 ```
 And the target library `socket-cpp.so` and binaries for examples can be found in `dist` directory under repositories home directory.
 
