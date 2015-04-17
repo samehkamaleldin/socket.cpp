@@ -1,5 +1,5 @@
 //==============================================================================================
-//= CLASS       : server                                                                    =
+//= CLASS       : server                                                                       =
 //= Description : TCP Server module that creates and manages an instance of a tcp server       =
 //==============================================================================================
 
@@ -22,10 +22,10 @@ server :: server (int portNumber)
 
   _server_address.sin_family      = AF_INET;           // IP version not specified. Can be both.
   _server_address.sin_addr.s_addr = htonl(INADDR_ANY); // make server accept all addresses
-  _server_address.sin_port        = htons(_port);       // Set port number in type [network byte order]
+  _server_address.sin_port        = htons(_port);      // Set port number in type [network byte order]
 
   // initialize socket with [internet addresses, socket stream sequences with default protocol]
-  _listenfd = socket( AF_INET, SOCK_STREAM, 0);
+  _server_socket_fd = socket( __type_internet_domain_sockets__, __type_byte_stream_socket__, 0);
 
 }
 
@@ -34,12 +34,12 @@ server :: server (int portNumber)
 // ---------------------------------------------------------------------------------------------
 int server :: Listen (){
 
-  int accepted_num_of_connections = 10000;
+  int accepted_num_of_connections = 100000;
 
   // bind the address name and port number to the scoket address struct
-  int bind_result   = bind(_listenfd,(struct sockaddr *)&_server_address,sizeof(_server_address));
+  int bind_result   = bind(_server_socket_fd,(struct sockaddr *)&_server_address,sizeof(_server_address));
 
-  int listen_result = listen(_listenfd, accepted_num_of_connections);
+  int listen_result = listen(_server_socket_fd, accepted_num_of_connections);
 
   // start listening to the port
   if ( listen_result != 0 || bind_result != 0)
@@ -59,29 +59,29 @@ int server :: Listen (){
     // initialize client address struct and accept new connection
     _client_address_length = sizeof( _client_address_length);
 
-    _connfd = accept( _listenfd, (struct sockaddr *)&_client_address, &_client_address_length);
+    _client_socket_fd = accept( _server_socket_fd, (struct sockaddr *)&_client_address, &_client_address_length);
 
     // skip iteration if no incoming connections
-    if(_connfd == -1)
+    if(_client_socket_fd == -1)
       continue;
 
-    cout << "Connection accepted - " << _connfd << std::endl;
+    cout << "Connection accepted - " << _client_socket_fd << std::endl;
     // spawn a new proceess to recieve messages
     if ((_childpid = fork()) == 0)
     {
 
-      close(_listenfd);
+      close(_server_socket_fd);
       // forever loop for accepting messages
       while(1)
       {
         // recieve a message from client to msg buffer
-        _message_length = recvfrom( _connfd, _message, _MSG_BUFFER_SIZE_, 0, (struct sockaddr *)&_client_address,&_client_address_length);
+        _message_length = recvfrom( _client_socket_fd, _message, _MSG_BUFFER_SIZE_, 0, (struct sockaddr *)&_client_address,&_client_address_length);
 
         // check if there is no more messages
         if(_message_length <= 0)
         {
-          close(_connfd);
-          cout << "Connection lost - " << _connfd << std::endl;
+          close(_client_socket_fd);
+          cout << "Connection lost - " << _client_socket_fd << std::endl;
           break;
         }
 
@@ -91,7 +91,7 @@ int server :: Listen (){
 
 
         // send back the received message [ For testing purposes]
-        //sendto(_connfd,_message,_message_length,0,(struct sockaddr *)&_client_address,sizeof(_client_address));
+        sendto(_client_socket_fd,_message,_message_length,0,(struct sockaddr *)&_client_address,sizeof(_client_address));
 
         // execute OnMessage function if available
         if ( _on_msg_fn_ptr  != NULL)

@@ -26,6 +26,9 @@ using std::string;
 
 class Node{
 
+private:
+  int _self_socket;
+
 public:
   // initialize an new tcp server instance
   Node();

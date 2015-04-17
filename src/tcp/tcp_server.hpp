@@ -6,6 +6,7 @@
 #ifndef _TCP_SERVER_
 #define _TCP_SERVER_
 
+#include <vector>
 #include <iostream>
 #include <string>
 #include <unistd.h>
@@ -15,6 +16,7 @@
 #include <netinet/in.h> // Needed for internet addresses
 
 #include <net/node.hpp>
+#include <net/utils.hpp>
 
 using std::string;
 using std::cout;
@@ -44,7 +46,7 @@ private:
   struct sockaddr_in _server_address,_client_address;
 
   // sockets file discriptors and message length variable
-  int    _listenfd , _connfd, _message_length, _port;
+  int    _server_socket_fd , _client_socket_fd, _message_length, _port;
 
   // socket address length variable
   socklen_t _client_address_length;

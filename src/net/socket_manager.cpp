@@ -5,7 +5,7 @@
 // SUMMARY   : Impelementation and of socket manager class that manages socket utilitles
 //==============================================================================================
 
-#include <net/socket-manager.hpp>  // for linkage with the class header file
+#include <net/socket_manager.hpp>  // for linkage with the class header file
 #include <net/utils.hpp>           // for using our defined macros
 #include <strings.h>               // for using bzero function
 #include <sys/socket.h>            // Needed for the socket functions
